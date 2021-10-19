@@ -1,15 +1,20 @@
 import { app } from "./app";
 import { createConnection } from "typeorm";
 import "reflect-metadata";
+import { OTP } from "./entities/Otp";
+import { User } from "./entities/User";
+
 const start = async () => {
   try {
     await createConnection({
       type: "postgres",
       host: "localhost",
-      port: 3306,
+      port: 5432,
       username: "test",
       password: "test",
       database: "test",
+      entities: [OTP, User],
+      synchronize: true,
     });
   } catch (err) {
     console.error(err);
